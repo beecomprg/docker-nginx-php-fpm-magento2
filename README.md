@@ -1,2 +1,3 @@
-# Magento 2 docker nginx
+# Magento 2 docker nginx with php fpm
+- built from Linux Alpine
 
