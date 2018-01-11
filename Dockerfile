@@ -138,6 +138,7 @@ EXPOSE 80
 STOPSIGNAL SIGTERM
 
 CMD ["nginx", "-g", "daemon off;"]
+RUN ["chmod", "+x", "/usr/local/bin/start"]
 
 COPY conf/nginx.conf /etc/nginx/conf.d/default.conf
 
