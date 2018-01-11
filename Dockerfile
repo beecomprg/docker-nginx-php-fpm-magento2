@@ -138,7 +138,7 @@ EXPOSE 80
 STOPSIGNAL SIGTERM
 
 CMD ["nginx", "-g", "daemon off;"]
-RUN ["chmod", "+x", "/usr/local/bin/start"]
+CMD ["php-fpm"]
 
 COPY conf/nginx.conf /etc/nginx/conf.d/default.conf
 
