@@ -131,10 +131,17 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
+RUN	apk add --no-cache bash \
+        supervisor \
+        && mkdir -p /var/log/supervisor
+
 COPY nginx.conf /etc/nginx/nginx.conf
+
 COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 80
+ADD conf/supervisord.conf /etc/supervisord.conf
+
+EXPOSE 80 443
 
 STOPSIGNAL SIGTERM
 
@@ -142,6 +149,6 @@ COPY bin/* /usr/local/bin/
 
 COPY conf/nginx.conf /etc/nginx/conf.d/default.conf
 
-#ENTRYPOINT ["docker-entrypoint"]
+ENTRYPOINT ["/usr/local/bin/start"]
 
 
