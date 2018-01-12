@@ -135,9 +135,11 @@ RUN	apk add --no-cache bash \
         supervisor \
         && mkdir -p /var/log/supervisor
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
+COPY conf/nginx.vh.default.conf /etc/nginx/conf.d/default.conf
+
+COPY conf/default.conf /etc/nginx/conf.d/default.conf
 
 ADD conf/supervisord.conf /etc/supervisord.conf
 
@@ -147,7 +149,6 @@ STOPSIGNAL SIGTERM
 
 COPY bin/* /usr/local/bin/
 
-COPY conf/nginx.conf /etc/nginx/conf.d/default.conf
 
 ENTRYPOINT ["/usr/local/bin/start"]
 
