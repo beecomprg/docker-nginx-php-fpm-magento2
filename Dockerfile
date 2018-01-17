@@ -1,4 +1,4 @@
-FROM xbery/docker-php-fpm-magento2:alpine
+FROM xbery/docker-php-fpm-magento2:latest
 
 ENV NGINX_VERSION 1.12.2
 
