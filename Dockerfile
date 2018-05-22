@@ -139,12 +139,12 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 
 COPY conf/magento.conf /etc/nginx/conf.d/default.conf
 
-ADD conf/supervisord.conf /etc/supervisord.conf
+ADD conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80 443
 
 STOPSIGNAL SIGTERM
 
-COPY bin/* /usr/local/bin/
+#COPY bin/* /usr/local/bin/
 
-ENTRYPOINT ["/usr/local/bin/start"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
