@@ -34,48 +34,48 @@ if [ ! -z "$GIT_NAME" ]; then
 fi
 
 # Dont pull code down if the .git folder exists
-if [ ! -d "/var/www/html/.git" ]; then
- # Pull down code from git for our site!
- if [ ! -z "$GIT_REPO" ]; then
-   # Remove the test index file if you are pulling in a git repo
-   if [ ! -z ${REMOVE_FILES} ] && [ ${REMOVE_FILES} == 0 ]; then
-     echo "skiping removal of files"
-   else
-     rm -Rf /var/www/html/*
-   fi
-   GIT_COMMAND='git clone '
-   if [ ! -z "$GIT_BRANCH" ]; then
-     GIT_COMMAND=${GIT_COMMAND}" -b ${GIT_BRANCH}"
-   fi
-
-   if [ -z "$GIT_USERNAME" ] && [ -z "$GIT_PERSONAL_TOKEN" ]; then
-     GIT_COMMAND=${GIT_COMMAND}" ${GIT_REPO}"
-   else
-    if [[ "$GIT_USE_SSH" == "1" ]]; then
-      GIT_COMMAND=${GIT_COMMAND}" ${GIT_REPO}"
-    else
-      GIT_COMMAND=${GIT_COMMAND}" https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO}"
-    fi
-   fi
-   ${GIT_COMMAND} /var/www/html || exit 1
-   if [ -z "$SKIP_CHOWN" ]; then
-     chown -Rf nginx.nginx /var/www/html
-   fi
- fi
-fi
+#if [ ! -d "/var/www/html/.git" ]; then
+# # Pull down code from git for our site!
+# if [ ! -z "$GIT_REPO" ]; then
+#   # Remove the test index file if you are pulling in a git repo
+#   if [ ! -z ${REMOVE_FILES} ] && [ ${REMOVE_FILES} == 0 ]; then
+#     echo "skiping removal of files"
+#   else
+#     rm -Rf /var/www/html/*
+#   fi
+#   GIT_COMMAND='git clone '
+#   if [ ! -z "$GIT_BRANCH" ]; then
+#     GIT_COMMAND=${GIT_COMMAND}" -b ${GIT_BRANCH}"
+#   fi
+#
+#   if [ -z "$GIT_USERNAME" ] && [ -z "$GIT_PERSONAL_TOKEN" ]; then
+#     GIT_COMMAND=${GIT_COMMAND}" ${GIT_REPO}"
+#   else
+#    if [[ "$GIT_USE_SSH" == "1" ]]; then
+#      GIT_COMMAND=${GIT_COMMAND}" ${GIT_REPO}"
+#    else
+#      GIT_COMMAND=${GIT_COMMAND}" https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO}"
+#    fi
+#   fi
+#   ${GIT_COMMAND} /var/www/html || exit 1
+#   if [ -z "$SKIP_CHOWN" ]; then
+#     chown -Rf nginx.nginx /var/www/html
+#   fi
+# fi
+#fi
 
 # Enable custom nginx config files if they exist
-if [ -f /var/www/html/conf/nginx/nginx.conf ]; then
-  cp /var/www/html/conf/nginx/nginx.conf /etc/nginx/nginx.conf
-fi
-
-if [ -f /var/www/html/conf/nginx/nginx-site.conf ]; then
-  cp /var/www/html/conf/nginx/nginx-site.conf /etc/nginx/sites-available/default.conf
-fi
-
-if [ -f /var/www/html/conf/nginx/nginx-site-ssl.conf ]; then
-  cp /var/www/html/conf/nginx/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
-fi
+#if [ -f /var/www/html/conf/nginx/nginx.conf ]; then
+#  cp /var/www/html/conf/nginx/nginx.conf /etc/nginx/nginx.conf
+#fi
+#
+#if [ -f /var/www/html/conf/nginx/nginx-site.conf ]; then
+#  cp /var/www/html/conf/nginx/nginx-site.conf /etc/nginx/sites-available/default.conf
+#fi
+#
+#if [ -f /var/www/html/conf/nginx/nginx-site-ssl.conf ]; then
+#  cp /var/www/html/conf/nginx/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
+#fi
 
 
 # Prevent config files from being filled to infinity by force of stop and restart the container
@@ -170,18 +170,18 @@ else
     fi
 fi
 
-if [ ! -z "$PUID" ]; then
-  if [ -z "$PGID" ]; then
-    PGID=${PUID}
-  fi
-  deluser www-data
-  addgroup -g ${PGID} nginx
-  adduser -D -S -h /var/cache/www-data -s /sbin/nologin -G www-data -u ${PUID} www-data
-else
-  if [ -z "$SKIP_CHOWN" ]; then
-    chown -Rf www-data: /var/www/html
-  fi
-fi
+#if [ ! -z "$PUID" ]; then
+#  if [ -z "$PGID" ]; then
+#    PGID=${PUID}
+#  fi
+#  deluser www-data
+#  addgroup -g ${PGID} nginx
+#  adduser -D -S -h /var/cache/www-data -s /sbin/nologin -G www-data -u ${PUID} www-data
+#else
+#  if [ -z "$SKIP_CHOWN" ]; then
+#    chown -Rf www-data: /var/www/html
+#  fi
+#fi
 
 # Run custom scripts
 if [[ "$RUN_SCRIPTS" == "1" ]] ; then
