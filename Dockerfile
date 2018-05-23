@@ -137,7 +137,9 @@ RUN	apk add --no-cache bash \
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-COPY conf/magento.conf /etc/nginx/conf.d/default.conf
+COPY conf/default.conf /etc/nginx/conf.d/default.conf
+
+COPY conf/magento.conf /etc/nginx/conf.d/magento.conf
 
 ADD conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
