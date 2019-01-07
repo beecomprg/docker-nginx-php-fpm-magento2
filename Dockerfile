@@ -1,4 +1,4 @@
-FROM beecomprg/docker-php-fpm-magento2:7.1.25
+FROM beecomprg/docker-php-fpm-magento2:7.1.25-1
 
 ENV NGINX_VERSION 1.15.0
 
