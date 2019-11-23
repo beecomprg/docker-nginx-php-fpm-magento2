@@ -1,4 +1,4 @@
-FROM beecomprg/docker-php-fpm-magento2:7.3.11-stretch
+FROM beecomprg/docker-php-fpm-magento2:7.3.12-stretch
 
 EXPOSE 80
 EXPOSE 443
