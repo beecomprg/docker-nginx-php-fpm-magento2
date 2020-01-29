@@ -1,10 +1,10 @@
-FROM beecomprg/docker-php-fpm-magento2:7.2.25-stretch
+FROM beecomprg/docker-php-fpm-magento2:7.2.27-stretch
 
 EXPOSE 80
 EXPOSE 443
 
 # http://nginx.org/en/download.html
-ENV NGINX_VERSION 1.17.5
+ENV NGINX_VERSION 1.17.8
 
 # https://github.com/apache/incubator-pagespeed-ngx/releases
 #change to stable for stable release channel
