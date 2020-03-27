@@ -1,7 +1,4 @@
-FROM beecomprg/docker-php-fpm-magento2:7.3.16-stretch
-
-EXPOSE 80
-EXPOSE 443
+FROM beecomprg/docker-php-fpm-magento2:7.3.16-stretch-2
 
 # http://nginx.org/en/download.html
 ENV NGINX_VERSION 1.17.9
