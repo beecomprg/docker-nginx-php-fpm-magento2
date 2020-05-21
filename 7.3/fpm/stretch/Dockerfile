@@ -8,8 +8,8 @@ ENV OPENSSL_VERSION 1.1.1c
 
 RUN useradd -r -s /usr/sbin/nologin nginx \
 	&& mkdir -p /var/log/nginx /var/cache/nginx \
-	&& apt-get update \
-	&& apt-get -y --no-install-recommends install \
+	&& apt update \
+	&& apt -y --no-install-recommends install \
 		curl \
 		unzip \
 		wget \
@@ -30,8 +30,8 @@ RUN useradd -r -s /usr/sbin/nologin nginx \
 		procps \
 		supervisor \
 	&& mkdir -p /var/log/supervisor \
-	&& wget -O - -c https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz --tries=3 --no-check-certificate | tar xzf - -C /tmp \
-	&& wget -O - -c http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz | tar xzf - -C /tmp \
+	&& wget -q -O - -c https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz --tries=3 --no-check-certificate | tar xzf - -C /tmp \
+	&& wget -q -O - -c http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz | tar xzf - -C /tmp \
 	&& cd /tmp/nginx-${NGINX_VERSION} \
 	&& ./configure \
 		--prefix=/etc/nginx  \
@@ -78,8 +78,8 @@ RUN useradd -r -s /usr/sbin/nologin nginx \
 		--with-openssl=/tmp/openssl-${OPENSSL_VERSION} \
 	&& make \
 	&& make install \
-	&& apt-get autoremove -yqq \
-	&& apt-get clean \
+	&& apt autoremove -yqq \
+	&& apt clean \
 	&& rm -Rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
 
 COPY ./etc/nginx/ /etc/nginx/
