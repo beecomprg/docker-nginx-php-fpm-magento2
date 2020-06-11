@@ -1,4 +1,4 @@
-FROM beecomprg/docker-php-fpm-magento2:7.3.18-stretch-4
+FROM beecomprg/docker-php-fpm-magento2:7.3.18-stretch-5
 
 # http://nginx.org/en/download.html
 ENV NGINX_VERSION 1.17.9
